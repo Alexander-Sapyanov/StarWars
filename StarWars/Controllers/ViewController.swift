@@ -11,15 +11,17 @@ import Alamofire
 class ViewController: UIViewController {
     
     var filmsTableView: UITableView!
-    
     var films: [Film] = []
   
 
+    // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         createTableView()
         fetchFilms()
     }
+    
+    // MARK: - Functions
     func fetchFilms() {
         AF.request("https://swapi.dev/api/films")
             .validate().responseDecodable(of: Films.self) { (response) in
@@ -40,6 +42,7 @@ class ViewController: UIViewController {
     }
 }
 
+    // MARK: - Extensions
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
