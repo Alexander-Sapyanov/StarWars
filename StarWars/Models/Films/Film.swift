@@ -15,6 +15,7 @@ struct Film: Codable {
     let producer: String
     let releaseDate: String
     let starships: [String]
+    let characters: [String]
     
     enum CodingKeys: String, CodingKey {
         case id = "episode_id"
@@ -24,5 +25,6 @@ struct Film: Codable {
         case producer
         case releaseDate = "release_date"
         case starships
+        case characters = "characters"
     }
 }

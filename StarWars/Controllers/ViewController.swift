@@ -18,6 +18,7 @@ class ViewController: UIViewController {
                         "Phantom menace",
                         "Attack of the clones",
                         "Revenge of the sith"]
+    var characters: [Character] = []
     
     // Video Play
     let videoPreviewLooper = VideoLooperView(videos: Video.localVideos())
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         createTableView()
         fetchFilms()
+        fetchCharacters()
         
         
         view.addSubview(videoPreviewLooper)
@@ -52,8 +54,16 @@ class ViewController: UIViewController {
                 guard let films = response.value else { return }
                 self.films = films.all
                 self.filmsCollectionView.reloadData()
-                
-                print(films.count)
+            }
+        
+    }
+    func fetchCharacters() {
+        AF.request("https://swapi.dev/api/people/")
+            .validate().responseDecodable(of: Characters.self) { (response) in
+                guard let characters = response.value else { return }
+                self.characters = characters.all
+                print( characters.count)
+           
             }
     }
     
@@ -90,7 +100,12 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifire,for: indexPath) as! FilmCollectionViewCell
-     
+        
+
+        
+        
+        
+      
         cell.nameLabel.text = films[indexPath.row].title
         cell.caseImageView.image = UIImage(named: imageForFilm[indexPath.row])
         cell.layer.cornerRadius = 18
