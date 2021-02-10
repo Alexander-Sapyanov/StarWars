@@ -34,7 +34,7 @@ class VideoLooperView: UIView {
         addAllVideosToPlayer()
         
         
-        queuePlayer.volume = 0.5
+        queuePlayer.volume = 0.0
         queuePlayer.play()
         
         

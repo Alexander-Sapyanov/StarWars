@@ -20,6 +20,8 @@ class ViewController: UIViewController {
                         "Revenge of the sith"]
     var characters: [Character] = []
     
+    var selectedItem: Film? = nil
+    
     // Video Play
     let videoPreviewLooper = VideoLooperView(videos: Video.localVideos())
     
@@ -54,6 +56,7 @@ class ViewController: UIViewController {
                 guard let films = response.value else { return }
                 self.films = films.all
                 self.filmsCollectionView.reloadData()
+                
             }
         
     }
@@ -62,7 +65,7 @@ class ViewController: UIViewController {
             .validate().responseDecodable(of: Characters.self) { (response) in
                 guard let characters = response.value else { return }
                 self.characters = characters.all
-                print( characters.count)
+             
            
             }
     }
@@ -100,16 +103,22 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifire,for: indexPath) as! FilmCollectionViewCell
-        
-
-        
-        
-        
-      
         cell.nameLabel.text = films[indexPath.row].title
         cell.caseImageView.image = UIImage(named: imageForFilm[indexPath.row])
         cell.layer.cornerRadius = 18
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedItem = films[indexPath.row]
+        let vc = DescriptionViewController()
+        vc.data = selectedItem
+        vc.setPosterImage(imageName: imageForFilm[indexPath.row])
+        vc.modalPresentationStyle = .fullScreen
+        vc.setLabel(episodeName: films[indexPath.row].title)
+        present(vc, animated: true, completion: nil)
+      
+        
     }
 }
 
@@ -118,3 +127,4 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 200, height: 300)
     }
 }
+
