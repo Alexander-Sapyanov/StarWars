@@ -8,13 +8,10 @@
 import UIKit
 
 class FilmCollectionViewCell: UICollectionViewCell {
-    
     static let identifire = "Cell"
-
     
     override init(frame: CGRect) {
          super.init(frame: frame)
-
          addViews()
      }
     
@@ -24,12 +21,11 @@ class FilmCollectionViewCell: UICollectionViewCell {
     
     var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22)
+        label.font = UIFont(name: "Helvetica", size: 16)
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     var caseImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
@@ -41,11 +37,10 @@ class FilmCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    // MARK: - Functions
     func addViews() {
         addSubview(caseImageView)
         addSubview(nameLabel)
-        
-        
         
         nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
         nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -10).isActive = true
