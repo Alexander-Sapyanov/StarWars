@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class DescriptionViewController: UIViewController {
     
@@ -23,24 +24,25 @@ class DescriptionViewController: UIViewController {
         return button
     }()
     
+    var infoTableView = UITableView()
     var posterImage = UIImageView()
     var nameLabel = UILabel()
-    var charactersInFilm: [Character] = []
+    var charactersInFilm: [Character?] = []
     var charactersCollectionView: UICollectionView?
 
     
 
-
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         view.addSubview(backButton)
-        setCharactersCollectionView()
-     
+        setTableView()
     }
+    
+    // MARK: - Functions
     func setPosterImage(imageName: String) {
-        
         view.addSubview(posterImage)
         posterImage.backgroundColor = .red
         posterImage.translatesAutoresizingMaskIntoConstraints = false
@@ -56,66 +58,48 @@ class DescriptionViewController: UIViewController {
     
     func setLabel(episodeName: String) {
         view.addSubview(nameLabel)
-        
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.topAnchor.constraint(equalTo: posterImage.bottomAnchor, constant: 30).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: posterImage.leftAnchor, constant: 10).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: posterImage.rightAnchor, constant: -10).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: posterImage.bottomAnchor, constant: 10).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: posterImage.leftAnchor, constant: -30).isActive = true
+        nameLabel.rightAnchor.constraint(equalTo: posterImage.rightAnchor, constant: 30).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         nameLabel.text = episodeName
         nameLabel.textAlignment = .center
         nameLabel.font = UIFont(name: "Starjedi", size: 18)
     }
     
-    
-    func setCharactersCollectionView() {
+    func setTableView() {
+        view.addSubview(infoTableView)
+        infoTableView.translatesAutoresizingMaskIntoConstraints = false
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.addSubview(charactersCollectionView!)
-        charactersCollectionView?.delegate = self
-        charactersCollectionView?.dataSource = self
-        charactersCollectionView?.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
-        
-        charactersCollectionView?.translatesAutoresizingMaskIntoConstraints = false
-        charactersCollectionView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 550).isActive = true
-        charactersCollectionView?.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        charactersCollectionView?.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-        charactersCollectionView?.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        
-        
+        infoTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 400).isActive = true
+        infoTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        infoTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        infoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        infoTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        infoTableView.dataSource = self
     }
+    
+
     
     @objc func goBack() {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-
-   
-
 }
 
-
-extension DescriptionViewController: UICollectionViewDelegateFlowLayout {
-    
-}
-
-extension DescriptionViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension DescriptionViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as! CharactersCollectionViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = data?.title
         cell.backgroundColor = .red
-        cell.layer.cornerRadius = 25
-        cell.nameLabel.text = charactersInFilm[indexPath.row].name
-        
-        // нужно сделать функцию принемающую ссылку , а возвращающую массив персонажей в конкретном фильме 
         return cell
     }
     
     
 }
+
+

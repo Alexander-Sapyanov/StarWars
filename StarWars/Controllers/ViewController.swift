@@ -12,6 +12,7 @@ import AVKit
 class ViewController: UIViewController {
     var filmsCollectionView: UICollectionView!
     var films: [Film] = []
+    var items: [Film] = []
     let imageForFilm = ["A New Hope",
                         "The Empire strikes back",
                         "Return of the Jedi",
@@ -20,7 +21,7 @@ class ViewController: UIViewController {
                         "Revenge of the sith"]
     var characters: [Character] = []
     
-    var selectedItem: Film? = nil
+    var selectedItem: Film?
     
     // Video Play
     let videoPreviewLooper = VideoLooperView(videos: Video.localVideos())
@@ -55,10 +56,10 @@ class ViewController: UIViewController {
             .validate().responseDecodable(of: Films.self) { (response) in
                 guard let films = response.value else { return }
                 self.films = films.all
+                self.items = films.all
                 self.filmsCollectionView.reloadData()
                 
             }
-        
     }
     func fetchCharacters() {
         AF.request("https://swapi.dev/api/people/")
@@ -98,12 +99,13 @@ class ViewController: UIViewController {
     // MARK: - Extensions
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return films.count
+        return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifire,for: indexPath) as! FilmCollectionViewCell
-        cell.nameLabel.text = films[indexPath.row].title
+        let item = items[indexPath.row]
+        cell.nameLabel.text = item.title
         cell.caseImageView.image = UIImage(named: imageForFilm[indexPath.row])
         cell.layer.cornerRadius = 18
         return cell
@@ -114,12 +116,11 @@ extension ViewController: UICollectionViewDataSource {
         let vc = DescriptionViewController()
         vc.data = selectedItem
         vc.setPosterImage(imageName: imageForFilm[indexPath.row])
+        vc.setLabel(episodeName: selectedItem!.title)
         vc.modalPresentationStyle = .fullScreen
-        vc.setLabel(episodeName: films[indexPath.row].title)
-        vc.charactersInFilm = characters
-        present(vc, animated: true, completion: nil)
-      
         
+        
+        present(vc, animated: true, completion: nil)
     }
 }
 

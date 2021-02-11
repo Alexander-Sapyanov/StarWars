@@ -91,10 +91,10 @@
 		11D3058025D168F0000B5018 /* StarWars */ = {
 			isa = PBXGroup;
 			children = (
+				11D3059A25D169DB000B5018 /* Models */,
 				11D305A525D193CD000B5018 /* View */,
 				11D3059D25D169F6000B5018 /* Controllers */,
 				11D3059C25D169E5000B5018 /* Networking */,
-				11D3059A25D169DB000B5018 /* Models */,
 				11D3058125D168F1000B5018 /* AppDelegate.swift */,
 				11D3058325D168F1000B5018 /* SceneDelegate.swift */,
 				11D3058725D168F1000B5018 /* Main.storyboard */,
