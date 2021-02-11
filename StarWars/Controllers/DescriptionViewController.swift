@@ -25,6 +25,8 @@ class DescriptionViewController: UIViewController {
     
     var posterImage = UIImageView()
     var nameLabel = UILabel()
+    var charactersInFilm: [Character] = []
+    var charactersCollectionView: UICollectionView?
 
     
 
@@ -32,17 +34,10 @@ class DescriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-
-      
-    
         view.backgroundColor = .white
         view.addSubview(backButton)
+        setCharactersCollectionView()
      
-        
-        
-        
-        
     }
     func setPosterImage(imageName: String) {
         
@@ -66,8 +61,30 @@ class DescriptionViewController: UIViewController {
         nameLabel.topAnchor.constraint(equalTo: posterImage.bottomAnchor, constant: 30).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: posterImage.leftAnchor, constant: 10).isActive = true
         nameLabel.rightAnchor.constraint(equalTo: posterImage.rightAnchor, constant: -10).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         nameLabel.text = episodeName
+        nameLabel.textAlignment = .center
+        nameLabel.font = UIFont(name: "Starjedi", size: 18)
+    }
+    
+    
+    func setCharactersCollectionView() {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.addSubview(charactersCollectionView!)
+        charactersCollectionView?.delegate = self
+        charactersCollectionView?.dataSource = self
+        charactersCollectionView?.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
+        
+        charactersCollectionView?.translatesAutoresizingMaskIntoConstraints = false
+        charactersCollectionView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 550).isActive = true
+        charactersCollectionView?.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        charactersCollectionView?.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        charactersCollectionView?.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        
     }
     
     @objc func goBack() {
@@ -78,4 +95,27 @@ class DescriptionViewController: UIViewController {
 
    
 
+}
+
+
+extension DescriptionViewController: UICollectionViewDelegateFlowLayout {
+    
+}
+
+extension DescriptionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as! CharactersCollectionViewCell
+        cell.backgroundColor = .red
+        cell.layer.cornerRadius = 25
+        cell.nameLabel.text = charactersInFilm[indexPath.row].name
+        
+        // нужно сделать функцию принемающую ссылку , а возвращающую массив персонажей в конкретном фильме 
+        return cell
+    }
+    
+    
 }

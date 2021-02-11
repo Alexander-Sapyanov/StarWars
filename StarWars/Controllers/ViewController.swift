@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        createTableView()
+        createCollectionView()
         fetchFilms()
         fetchCharacters()
         
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
     }
     
 
-    func createTableView() {
+    func createCollectionView() {
         let episodeLabel = UILabel()
         let frame = CGRect(x:0 , y: Int(view.bounds.size.height / 2 ), width: Int(view.bounds.size.width) , height: Int(view.bounds.size.height / 2)  )
     
@@ -116,6 +116,7 @@ extension ViewController: UICollectionViewDataSource {
         vc.setPosterImage(imageName: imageForFilm[indexPath.row])
         vc.modalPresentationStyle = .fullScreen
         vc.setLabel(episodeName: films[indexPath.row].title)
+        vc.charactersInFilm = characters
         present(vc, animated: true, completion: nil)
       
         
