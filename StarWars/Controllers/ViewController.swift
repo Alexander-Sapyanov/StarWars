@@ -22,34 +22,16 @@ class ViewController: UIViewController {
     var characters: [Character] = []
     
     var selectedItem: Film?
-    
-    // Video Play
-    let videoPreviewLooper = VideoLooperView(videos: Video.localVideos())
-    
+
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         createCollectionView()
         fetchFilms()
         fetchCharacters()
-        
-        
-        view.addSubview(videoPreviewLooper)
-        videoPreviewLooper.frame = CGRect(x: 10 , y: 10, width: view.bounds.size.width - 10,height: 400)
-        videoPreviewLooper.backgroundColor = .black
+ 
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        videoPreviewLooper.play()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        videoPreviewLooper.pause()
-    }
-    
+
     // MARK: - Functions
     func fetchFilms() {
         AF.request("https://swapi.dev/api/films")
@@ -58,9 +40,10 @@ class ViewController: UIViewController {
                 self.films = films.all
                 self.items = films.all
                 self.filmsCollectionView.reloadData()
-                
             }
     }
+    
+    
     func fetchCharacters() {
         AF.request("https://swapi.dev/api/people/")
             .validate().responseDecodable(of: Characters.self) { (response) in
@@ -70,7 +53,6 @@ class ViewController: UIViewController {
            
             }
     }
-    
 
     func createCollectionView() {
         let episodeLabel = UILabel()
@@ -101,7 +83,6 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifire,for: indexPath) as! FilmCollectionViewCell
         let item = items[indexPath.row]
@@ -118,8 +99,6 @@ extension ViewController: UICollectionViewDataSource {
         vc.setPosterImage(imageName: imageForFilm[indexPath.row])
         vc.setLabel(episodeName: selectedItem!.title)
         vc.modalPresentationStyle = .fullScreen
-        
-        
         present(vc, animated: true, completion: nil)
     }
 }

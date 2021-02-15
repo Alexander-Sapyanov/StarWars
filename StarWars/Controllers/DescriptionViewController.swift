@@ -87,6 +87,8 @@ class DescriptionViewController: UIViewController {
     }
 }
 
+
+// MARK: - Extensions
 extension DescriptionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10

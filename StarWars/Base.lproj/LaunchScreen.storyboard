@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,31 +14,8 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AW0-bZ-o79">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Darth Vader" translatesAutoresizingMaskIntoConstraints="NO" id="0Ut-az-RgG">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="0Ut-az-RgG" firstAttribute="top" secondItem="AW0-bZ-o79" secondAttribute="top" id="6eV-LE-0XB"/>
-                                    <constraint firstAttribute="trailing" secondItem="0Ut-az-RgG" secondAttribute="trailing" id="ADE-Q7-NbF"/>
-                                    <constraint firstItem="0Ut-az-RgG" firstAttribute="leading" secondItem="AW0-bZ-o79" secondAttribute="leading" id="OIb-Ev-EPu"/>
-                                    <constraint firstAttribute="bottom" secondItem="0Ut-az-RgG" secondAttribute="bottom" id="nYu-wL-hFu"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="AW0-bZ-o79" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-44" id="02Z-9Y-Pi5"/>
-                            <constraint firstItem="AW0-bZ-o79" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2ir-uy-DLh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AW0-bZ-o79" secondAttribute="trailing" id="YV3-Rk-VRx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="AW0-bZ-o79" secondAttribute="bottom" constant="-34" id="cJV-nI-boY"/>
-                        </constraints>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -47,10 +23,4 @@
             <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Darth Vader" width="888" height="679"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

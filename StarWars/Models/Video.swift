@@ -18,7 +18,12 @@ struct Video {
     static func localVideos() -> [Video] {
         var videos: [Video] = []
         
-        let titles = ["Скрытая угроза","Атака клонов","Месть Ситхов","Новая надежда", "Империя наносит ответный удар", "Возвращение джедая"]
+        let titles = ["A New Hope",
+                      "The Empire strikes back",
+                      "Return of the Jedi",
+                      "Phantom menace",
+                      "Attack of the clones",
+                      "Revenge of the sith"]
         let movieNames = ["videos", "videos2", "videos3"]
         
         for (index, name) in movieNames.enumerated() {
