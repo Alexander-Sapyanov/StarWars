@@ -122,13 +122,15 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedItem = films[indexPath.row]
         let vc = DescriptionViewController()
-        vc.data = selectedItem
+        vc.data.append(selectedItem!)
         vc.setPosterImage(imageName: imageForFilm[indexPath.row])
-        vc.setLabel(episodeName: selectedItem!.title)
+        vc.set(episodeName: selectedItem!.title)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
 }
+
+// MARK: - Extensions
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 200, height: 300)
