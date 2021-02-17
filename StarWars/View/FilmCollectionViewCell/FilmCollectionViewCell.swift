@@ -8,9 +8,6 @@
 import UIKit
 
 class FilmCollectionViewCell: UICollectionViewCell {
-    
-    
-    
     static let identifire = "Cell"
     override init(frame: CGRect) {
          super.init(frame: frame)
@@ -43,15 +40,16 @@ class FilmCollectionViewCell: UICollectionViewCell {
     func addViews() {
         addSubview(caseImageView)
         addSubview(nameLabel)
+        caseImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
+        caseImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
+        caseImageView.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
+        caseImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
         
         nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
-        nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -10).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: caseImageView.bottomAnchor, constant: 5).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: contentView.bounds.size.width).isActive = true
         
-        caseImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
-        caseImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
-        caseImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        caseImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50).isActive = true
+       
     }
 }

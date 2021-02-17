@@ -69,7 +69,7 @@ class DescriptionViewController: UIViewController {
         infoTableView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
         infoTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         infoTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        infoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -170).isActive = true
+        infoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         infoTableView.register(FilmTableViewCell.self, forCellReuseIdentifier: FilmTableViewCell.identifier)
         infoTableView.dataSource = self
     }

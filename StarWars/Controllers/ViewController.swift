@@ -54,38 +54,46 @@ class ViewController: UIViewController {
     }
 
     func createCollectionView() {
-        let episodeLabel = UILabel()
+        
         let frame = CGRect(x:0 , y: Int(view.bounds.size.height / 2 ), width: Int(view.bounds.size.width) , height: Int(view.bounds.size.height / 2)  )
-    
+        let episodeLabel = UILabel()
+        episodeLabel.text = "Episodes"
+        episodeLabel.textColor = .black
+        episodeLabel.translatesAutoresizingMaskIntoConstraints = false
+        episodeLabel.font = UIFont(name: "Starjedi", size: 40)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-     
+       
         filmsCollectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         filmsCollectionView.dataSource = self
         filmsCollectionView.delegate = self
         filmsCollectionView.backgroundColor = .white
-        
-        episodeLabel.text = "Episodes"
-        episodeLabel.textColor = .black
-        episodeLabel.font = UIFont(name: "Starjedi", size: 40)
-        episodeLabel.frame = CGRect(x: 10, y: 370, width: 220, height: 220)
-    
-        filmsCollectionView.register(FilmCollectionViewCell.self, forCellWithReuseIdentifier: FilmCollectionViewCell.identifire)
-        
         view.addSubview(filmsCollectionView)
         view.addSubview(episodeLabel)
+        
+        filmsCollectionView.register(FilmCollectionViewCell.self, forCellWithReuseIdentifier: FilmCollectionViewCell.identifire)
+        
+        NSLayoutConstraint.activate([
+            episodeLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -10),
+            episodeLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            episodeLabel.widthAnchor.constraint(equalTo: episodeLabel.widthAnchor)
+        ])
+        
+    
     }
     func createTableView() {
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Characters"
-        label.textColor = .red
-        label.backgroundColor = .black
-        label.font = UIFont(name: "Starjedi", size: 40)
+
+        let charactersLabel = UILabel()
+        charactersLabel.translatesAutoresizingMaskIntoConstraints = false
+        charactersLabel.text = "Characters"
+        charactersLabel.textColor = .red
+        charactersLabel.backgroundColor = .black
+        charactersLabel.font = UIFont(name: "Starjedi", size: 40)
+
         charactersTableView = UITableView()
         view.addSubview(charactersTableView)
-        view.addSubview(label)
+        view.addSubview(charactersLabel)
+        
         charactersTableView.backgroundColor = .black
         charactersTableView.dataSource = self
         charactersTableView.delegate = self
@@ -93,14 +101,14 @@ class ViewController: UIViewController {
         charactersTableView.register(CharactersTableViewCell.self, forCellReuseIdentifier: CharactersTableViewCell.identifier)
     
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
-            label.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
-            label.widthAnchor.constraint(equalTo: label.widthAnchor),
+            charactersLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            charactersLabel.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
+            charactersLabel.widthAnchor.constraint(equalTo: charactersLabel.widthAnchor),
             
             charactersTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            charactersTableView.topAnchor.constraint(equalTo: label.bottomAnchor),
+            charactersTableView.topAnchor.constraint(equalTo: charactersLabel.bottomAnchor),
             charactersTableView.bottomAnchor.constraint(equalTo: filmsCollectionView.topAnchor),
-            charactersTableView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            charactersTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
         ])
     }
 }
