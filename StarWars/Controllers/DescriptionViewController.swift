@@ -9,8 +9,6 @@ import UIKit
 import Alamofire
 
 class DescriptionViewController: UIViewController {
-    
-    
     var data: Film?
     private let backButton: UIButton = {
         let button = UIButton()
@@ -29,16 +27,13 @@ class DescriptionViewController: UIViewController {
     var nameLabel = UILabel()
     var charactersInFilm: [Character?] = []
     var charactersCollectionView: UICollectionView?
-
     
-
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .white
         view.addSubview(backButton)
-        setTableView()
     }
     
     // MARK: - Functions
@@ -66,22 +61,17 @@ class DescriptionViewController: UIViewController {
         nameLabel.text = episodeName
         nameLabel.textAlignment = .center
         nameLabel.font = UIFont(name: "Starjedi", size: 18)
-    }
-    
-    func setTableView() {
+        
         view.addSubview(infoTableView)
         infoTableView.translatesAutoresizingMaskIntoConstraints = false
         
-        infoTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 400).isActive = true
+        infoTableView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
         infoTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         infoTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         infoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         infoTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         infoTableView.dataSource = self
     }
-    
-
-    
     @objc func goBack() {
         dismiss(animated: true, completion: nil)
     }
@@ -96,12 +86,9 @@ extension DescriptionViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = data?.title
         cell.backgroundColor = .red
         return cell
     }
-    
-    
 }
 
 

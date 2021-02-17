@@ -8,8 +8,8 @@
 import UIKit
 
 class FilmCollectionViewCell: UICollectionViewCell {
-    static let identifire = "Cell"
     
+    static let identifire = "Cell"
     override init(frame: CGRect) {
          super.init(frame: frame)
          addViews()
